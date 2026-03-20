@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yaling Song — Postpartum Doula & Newborn Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #fdf6ee; --blush: #f2c5b0; --terracotta: #d4735e;
+      --sage: #8aab8e; --sage-dark: #5d8062; --warm-brown: #7a4f3a;
+      --text: #3e2c25; --text-light: #7a6258; --white: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito','Noto Serif SC',sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* LANG */
+    .lang-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--warm-brown); display: flex; justify-content: flex-end; align-items: center; padding: 0.4rem 2rem; gap: 0.5rem; }
+    .lang-btn { background: transparent; border: 1.5px solid rgba(255,255,255,0.5); color: #fff; padding: 0.25rem 0.9rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; cursor: pointer; letter-spacing: 0.05em; transition: background 0.2s; }
+    .lang-btn.active { background: rgba(255,255,255,0.25); border-color: #fff; }
+    .lang-btn:hover { background: rgba(255,255,255,0.15); }
+
+    /* VISIBILITY */
+    .zh { display: none !important; }
+    body.lang-zh .en { display: none !important; }
+    body.lang-zh .zh { display: block !important; }
+    body.lang-zh span.zh { display: inline !important; }
+    body.lang-zh h1.zh, body.lang-zh h2.zh, body.lang-zh p.zh, body.lang-zh div.zh { display: block !important; }
+
+    /* NAV */
+    nav { position: fixed; top: 32px; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; background: rgba(253,246,238,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(212,115,94,0.15); }
+    .nav-logo { font-family: 'Playfair Display',serif; font-size: 1.2rem; color: var(--warm-brown); font-style: italic; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--text-light); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--terracotta); }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; padding-top: 100px; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 4rem 3rem 4rem 5rem; animation: fadeUp 0.9s ease both; }
+    .hero-eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.7rem; }
+    .hero-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 2px; background: var(--sage-dark); }
+    .hero-title { font-family: 'Playfair Display',serif; font-size: clamp(2.4rem,4vw,3.8rem); line-height: 1.12; color: var(--warm-brown); margin-bottom: 1.2rem; }
+    .hero-title em { font-style: italic; color: var(--terracotta); }
+    .hero-sub { font-size: 1rem; color: var(--text-light); line-height: 1.75; max-width: 420px; margin-bottom: 2rem; }
+    .btn-primary { display: inline-block; background: var(--terracotta); color: #fff; padding: 0.85rem 2rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: background 0.25s, transform 0.2s; box-shadow: 0 6px 22px rgba(212,115,94,0.35); }
+    .btn-primary:hover { background: var(--warm-brown); transform: translateY(-2px); }
+    .hero-right { position: relative; overflow: hidden; animation: fadeIn 1.1s ease both; }
+    .hero-blob { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 70%; aspect-ratio: 1; background: var(--blush); border-radius: 60% 40% 55% 45%/45% 55% 40% 60%; z-index: 0; animation: blobMorph 8s ease-in-out infinite alternate; }
+    @keyframes blobMorph { 0% { border-radius: 60% 40% 55% 45%/45% 55% 40% 60%; } 100% { border-radius: 45% 55% 40% 60%/60% 40% 55% 45%; } }
+    .hero-img-wrap { position: absolute; top: 50%; left: 50%; transform: translate(-48%,-50%); width: 60%; aspect-ratio: 0.78; z-index: 1; border-radius: 50% 50% 48% 52%/55% 55% 45% 45%; overflow: hidden; box-shadow: 0 20px 60px rgba(122,79,58,0.25); }
+    .hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .hero-badge { position: absolute; bottom: 18%; left: 8%; z-index: 2; background: #fff; border-radius: 16px; padding: 0.85rem 1.2rem; box-shadow: 0 8px 28px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 0.7rem; animation: floatBadge 4s ease-in-out infinite; }
+    @keyframes floatBadge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .badge-icon { font-size: 1.4rem; }
+    .badge-text { font-size: 0.75rem; font-weight: 700; color: var(--warm-brown); line-height: 1.3; }
+    .badge-text span { display: block; color: var(--text-light); font-weight: 400; }
+    .hero-badge2 { position: absolute; top: 20%; right: 6%; z-index: 2; background: var(--sage); border-radius: 50px; padding: 0.55rem 1rem; color: #fff; font-size: 0.75rem; font-weight: 700; box-shadow: 0 6px 18px rgba(138,171,142,0.5); animation: floatBadge 4s ease-in-out infinite reverse; }
+    .cert-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+    .cert-chip { background: var(--cream); border: 1.5px solid var(--blush); color: var(--warm-brown); padding: 0.35rem 0.9rem; border-radius: 50px; font-size: 0.78rem; font-weight: 700; }
+
+    /* SECTIONS */
+    section { padding: 5.5rem 5rem; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 0.6rem; }
+    .section-title { font-family: 'Playfair Display',serif; font-size: clamp(1.8rem,3vw,2.6rem); color: var(--warm-brown); margin-bottom: 1.2rem; line-height: 1.2; }
+    .section-title em { font-style: italic; color: var(--terracotta); }
+
+    /* ABOUT */
+    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; background: var(--white); }
+    .about-img-wrap { position: relative; }
+    .about-photo { width: 100%; border-radius: 24px; aspect-ratio: 0.88; object-fit: cover; object-position: top; box-shadow: 0 16px 48px rgba(122,79,58,0.15); }
+    .about-floater { position: absolute; bottom: -1.5rem; right: -1.5rem; background: var(--terracotta); color: #fff; padding: 1.1rem 1.5rem; border-radius: 20px; font-weight: 700; font-size: 0.9rem; line-height: 1.3; box-shadow: 0 10px 30px rgba(212,115,94,0.4); }
+    .about-floater .big { display: block; font-size: 1.8rem; font-family: 'Playfair Display',serif; }
+    .about-text p { color: var(--text-light); line-height: 1.8; margin-bottom: 1rem; font-size: 0.96rem; }
+    .values-row { display: flex; gap: 0.8rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .value-chip { background: var(--cream); border: 1.5px solid var(--blush); color: var(--warm-brown); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.82rem; font-weight: 600; }
+
+    /* SKILLS */
+    #skills { background: var(--cream); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .skill-card { background: var(--white); border-radius: 20px; padding: 2rem 1.8rem; transition: transform 0.25s, box-shadow 0.25s; border: 1.5px solid transparent; }
+    .skill-card:hover { transform: translateY(-5px); box-shadow: 0 14px 38px rgba(122,79,58,0.1); border-color: var(--blush); }
+    .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .skill-card h3 { font-family: 'Playfair Display',serif; font-size: 1.15rem; color: var(--warm-brown); margin-bottom: 0.6rem; }
+    .skill-card p { color: var(--text-light); font-size: 0.88rem; line-height: 1.65; }
+
+    /* TIMELINE */
+    #experience { background: var(--white); }
+    .timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .timeline { margin-top: 2.5rem; position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom,var(--blush),var(--terracotta)); border-radius: 2px; }
+    .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 1.5rem; }
+    .timeline-item::before { content: ''; position: absolute; left: -2rem; top: 0.35rem; width: 12px; height: 12px; background: var(--terracotta); border-radius: 50%; border: 3px solid var(--white); box-shadow: 0 0 0 2px var(--terracotta); }
+    .timeline-date { font-size: 0.75rem; font-weight: 700; color: var(--sage-dark); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .timeline-title { font-family: 'Playfair Display',serif; font-size: 1.05rem; color: var(--warm-brown); margin-bottom: 0.3rem; }
+    .timeline-desc { color: var(--text-light); font-size: 0.88rem; line-height: 1.6; }
+
+    /* CERTS */
+    #certifications { background: var(--cream); }
+    .certs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2rem; margin-top: 2.5rem; }
+    .cert-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.07); transition: transform 0.25s; cursor: pointer; }
+    .cert-card:hover { transform: translateY(-4px); }
+    .cert-card img { width: 100%; height: 220px; object-fit: cover; object-position: top; display: block; }
+    .cert-info { padding: 1.2rem 1.5rem; }
+    .cert-info h4 { font-family: 'Playfair Display',serif; color: var(--warm-brown); font-size: 1rem; margin-bottom: 0.3rem; }
+    .cert-info p { color: var(--text-light); font-size: 0.82rem; }
+    .cert-list { margin-top: 2rem; display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+    .cert-pill { background: var(--white); border: 1.5px solid var(--blush); border-radius: 12px; padding: 0.8rem 1rem; text-align: center; font-size: 0.82rem; font-weight: 700; color: var(--warm-brown); line-height: 1.4; }
+
+    /* GALLERY */
+    #gallery { background: var(--white); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 2.5rem; }
+    .gallery-item { border-radius: 16px; overflow: hidden; cursor: pointer; }
+    .gallery-item img { width: 100%; height: 260px; object-fit: cover; object-position: top; transition: transform 0.4s; display: block; }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.wide img { height: 300px; }
+
+    /* PDF GALLERY */
+    #pdf-gallery { background: var(--cream); }
+    .pdf-tabs { display: flex; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .pdf-tab { background: var(--white); border: 2px solid var(--blush); color: var(--warm-brown); padding: 0.5rem 1.1rem; border-radius: 50px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .pdf-tab.active, .pdf-tab:hover { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+    .pdf-pages { display: none; margin-top: 2rem; }
+    .pdf-pages.active { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.2rem; }
+    .pdf-page-item { border-radius: 16px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.08); background: var(--white); transition: transform 0.25s, box-shadow 0.25s; }
+    .pdf-page-item:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+    .pdf-page-item img { width: 100%; display: block; object-fit: contain; background: #fff; }
+    .pdf-page-label { padding: 0.6rem 1rem; font-size: 0.78rem; font-weight: 700; color: var(--text-light); text-align: center; }
+
+    /* TESTIMONIALS */
+    #testimonials { background: var(--terracotta); color: #fff; text-align: center; }
+    #testimonials .section-label { color: rgba(255,255,255,0.7); }
+    #testimonials .section-title { color: #fff; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.8rem; margin-top: 2.8rem; }
+    .testimonial-card { background: rgba(255,255,255,0.13); border-radius: 20px; padding: 2rem; text-align: left; border: 1px solid rgba(255,255,255,0.2); }
+    .testimonial-quote { font-size: 1.8rem; margin-bottom: 0.8rem; opacity: 0.6; font-family: 'Playfair Display',serif; }
+    .testimonial-card p { font-size: 0.9rem; line-height: 1.7; opacity: 0.92; margin-bottom: 1.2rem; }
+    .testimonial-author { font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; }
+    .testimonial-author span { display: block; opacity: 0.65; font-weight: 400; font-size: 0.78rem; margin-top: 0.15rem; }
+
+    /* CONTACT */
+    #contact { background: var(--cream); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-info p { color: var(--text-light); line-height: 1.8; margin-bottom: 2rem; font-size: 0.95rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-detail { display: flex; align-items: center; gap: 1rem; font-size: 0.92rem; color: var(--text); }
+    .contact-detail .icon { width: 40px; height: 40px; background: var(--blush); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-light); }
+    .form-group input, .form-group select, .form-group textarea { padding: 0.8rem 1rem; border: 1.5px solid #e8d8cf; border-radius: 12px; background: var(--white); font-family: 'Nunito',sans-serif; font-size: 0.92rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--terracotta); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .btn-submit { background: var(--terracotta); color: #fff; border: none; padding: 0.95rem 2rem; border-radius: 50px; font-family: 'Nunito',sans-serif; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: background 0.25s, transform 0.2s; box-shadow: 0 6px 22px rgba(212,115,94,0.3); }
+    .btn-submit:hover { background: var(--warm-brown); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: var(--warm-brown); color: rgba(255,255,255,0.75); text-align: center; padding: 2.2rem; font-size: 0.85rem; }
+    footer strong { color: #fff; }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 500; align-items: center; justify-content: center; padding: 1rem; }
+    .modal-overlay.open { display: flex; }
+    .modal-overlay img { max-width: 92vw; max-height: 92vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); object-fit: contain; }
+    .modal-close { position: absolute; top: 1.2rem; right: 1.2rem; background: #fff; border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 1.2rem; cursor: pointer; z-index: 501; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    @media (max-width: 960px) {
+      nav { padding: 0.9rem 1.5rem; top: 30px; }
+      .nav-links { gap: 1rem; font-size: 0.75rem; }
+      #hero, #about, #contact { grid-template-columns: 1fr; }
+      #hero { min-height: auto; }
+      .hero-right { height: 65vw; }
+      .hero-left { padding: 3rem 1.5rem 2rem; }
+      section { padding: 4rem 1.5rem; }
+      .skills-grid, .testimonials-grid, .timeline-grid, .certs-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item.wide { grid-column: span 2; }
+      .cert-list { grid-template-columns: repeat(2,1fr); }
+      .form-row { grid-template-columns: 1fr; }
+      .about-floater { bottom: -1rem; right: -0.5rem; }
+      .pdf-pages.active { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="lang-en">
+
+<div class="lang-bar">
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">English</button>
+  <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">中文</button>
+</div>
+
+<nav>
+  <div class="nav-logo">Yaling Song</div>
+  <ul class="nav-links">
+    <li><a href="#about"><span class="en">About</span><span class="zh">关于我</span></a></li>
+    <li><a href="#skills"><span class="en">Services</span><span class="zh">服务</span></a></li>
+    <li><a href="#experience"><span class="en">Experience</span><span class="zh">经验</span></a></li>
+    <li><a href="#certifications"><span class="en">Certifications</span><span class="zh">证书</span></a></li>
+    <li><a href="#gallery"><span class="en">Gallery</span><span class="zh">相册</span></a></li>
+    <li><a href="#pdf-gallery"><span class="en">Documents</span><span class="zh">文件</span></a></li>
+    <li><a href="#contact"><span class="en">Contact</span><span class="zh">联系</span></a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="en">OB Maternity Academy Certified · CPR/BLS Certified</span>
+      <span class="zh">OB母婴学院认证 · CPR/BLS急救认证</span>
+    </div>
+    <h1 class="hero-title en">Warmth, expertise &<br><em>heart</em> — for you<br>and your newborn.</h1>
+    <h1 class="hero-title zh" style="font-family:'Noto Serif SC','Playfair Display',serif;">专业、用心、温暖——<br>陪伴您和宝宝走过<br><em>最珍贵的时光。</em></h1>
+    <p class="hero-sub en">I'm Yaling Song — a certified postpartum doula and newborn care specialist with 10+ years of experience serving families across China, the UK, and the US. Expert newborn care, mother recovery support, and bilingual presence throughout your postpartum period.</p>
+    <p class="hero-sub zh">我是宋亚玲，具有10年以上月嫂及育儿嫂经验，曾服务于中国、英国、美国等地的家庭。我提供专业的新生儿护理、产妇恢复支持及中英双语陪护服务。</p>
+    <a href="#contact" class="btn-primary">
+      <span class="en">Book a Free Consultation 🌸</span>
+      <span class="zh">免费预约咨询 🌸</span>
+    </a>
+    <div class="cert-chips">
+      <div class="cert-chip">🎓 <span class="en">Advanced Infant Care</span><span class="zh">高级育婴师</span></div>
+      <div class="cert-chip">🤱 <span class="en">Lactation Consultant</span><span class="zh">高级催乳师</span></div>
+      <div class="cert-chip">💆 <span class="en">Pediatric Massage</span><span class="zh">高级小儿推拿师</span></div>
+      <div class="cert-chip">❤️ <span class="en">CPR / BLS Certified</span><span class="zh">CPR急救认证</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-blob"></div>
+    <div class="hero-img-wrap">
+      <img src="images/photo5.jpg" alt="Yaling Song with newborn twins" />
+    </div>
+    <div class="hero-badge">
+      <div class="badge-icon">🌸</div>
+      <div class="badge-text">
+        <span class="en">10+ Years Experience<br><span>Newborn Specialist</span></span>
+        <span class="zh">10年以上经验<br><span>新生儿护理专家</span></span>
+      </div>
+    </div>
+    <div class="hero-badge2">
+      <span class="en">✨ Bilingual English & Mandarin</span>
+      <span class="zh">✨ 中英双语服务</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-img-wrap">
+    <img src="images/photo2.jpg" alt="Yaling Song" class="about-photo" />
+    <div class="about-floater">
+      <span class="big">10+</span>
+      <span class="en">Years Experience</span>
+      <span class="zh">年月嫂经验</span>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="section-label en">About Me</div>
+    <div class="section-label zh">关于我</div>
+    <h2 class="section-title en">A caring companion for your <em>whole journey</em></h2>
+    <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">专业陪伴，<em>温暖同行</em></h2>
+    <p class="en">My name is Yaling Song, and I have been a professional postpartum caregiver and newborn specialist for over 10 years. Born in Weihai, Shandong, China in 1975, my gentle nature, reliability, and genuine love for babies and new mothers are at the heart of everything I do.</p>
+    <p class="zh">我叫宋亚玲，1975年出生于山东威海，从事月嫂和育儿嫂工作已超过10年。我性格温柔善良、踏实麻利、干净利落，对宝宝和产妈妈充满爱心与耐心。</p>
+    <p class="en">I have cared for families across China, the United Kingdom, and the United States — including New York, Austin, Los Angeles, San Francisco Bay Area, and Phoenix, Arizona. I am fully comfortable serving both Mandarin-speaking and English-speaking households.</p>
+    <p class="zh">我曾服务的家庭遍及中国、英国（伦敦）及美国（纽约、奥斯汀、洛杉矶、旧金山湾区、凤凰城），能够为中英文家庭提供无障碍的贴心服务。</p>
+    <p class="en">Beyond baby care, I hold a Level 5 Chinese Pastry Chef certification and prepare nourishing postpartum meals — soups, traditional breads, and balanced dishes — to support milk supply and recovery.</p>
+    <p class="zh">除了专业护理，我还拥有五级中式面点师资格，能为产妈妈精心准备营养月子餐，包括汤品、馒头、肉夹馍等，确保奶水充足、身体恢复。</p>
+    <div class="values-row">
+      <div class="value-chip">🌿 <span class="en">Postpartum Doula</span><span class="zh">月嫂</span></div>
+      <div class="value-chip">👶 <span class="en">Newborn Specialist</span><span class="zh">育婴师</span></div>
+      <div class="value-chip">💬 <span class="en">Bilingual</span><span class="zh">中英双语</span></div>
+      <div class="value-chip">🍜 <span class="en">Postpartum Nutrition</span><span class="zh">月子餐</span></div>
+      <div class="value-chip">💆 <span class="en">Pediatric Massage</span><span class="zh">小儿推拿</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label en">What I Offer</div>
+  <div class="section-label zh">服务内容</div>
+  <h2 class="section-title en">Services tailored <em>for you</em></h2>
+  <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">为您<em>量身定制</em>的专业服务</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🍼</div>
+      <h3><span class="en">Newborn Care</span><span class="zh">新生儿护理</span></h3>
+      <p class="en">Bathing, tummy time, jaundice monitoring, eczema prevention, burping, soothing, and safe sleep. Expert first-aid for choking and spitting up.</p>
+      <p class="zh">新生儿洗澡、黄疸观察、湿疹预防、拍嗝、哭闹安抚、安全照料，以及吐奶呛奶的急救处理。</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤱</div>
+      <h3><span class="en">Breastfeeding & Lactation</span><span class="zh">母乳喂养与催乳</span></h3>
+      <p class="en">Opening milk supply, clogged ducts, engorgement relief. Guidance on breastfeeding, formula, and combination feeding.</p>
+      <p class="zh">开奶、少奶、堵奶及涨奶护理；母乳喂养、配方奶及混合喂养指导。</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">💆</div>
+      <h3><span class="en">Pediatric Massage & Early Dev</span><span class="zh">婴儿抚触与早教</span></h3>
+      <p class="en">Infant massage, passive exercises, gas-relief movements, Montessori early stimulation, sensory training, and developmental play.</p>
+      <p class="zh">婴儿抚触、被动操、排气操、飞机抱，以及蒙氏早教游戏、感统训练和手指谣。</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🍲</div>
+      <h3><span class="en">Postpartum Nutrition & Cooking</span><span class="zh">月子餐制作</span></h3>
+      <p class="en">Daily cooking of nourishing postpartum meals — soups, steamed buns, traditional dishes — for mother's recovery and milk production.</p>
+      <p class="zh">每日精心烹制营养月子餐，包括各类汤品、馒头、肉夹馍、炒菜等，促进产妇恢复和奶水充足。</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🏥</div>
+      <h3><span class="en">Mother Recovery Care</span><span class="zh">产妇护理</span></h3>
+      <p class="en">Sponge baths, herbal hair washing, foot soaks, hydration reminders, and emotional support throughout the fourth trimester.</p>
+      <p class="zh">产妇擦浴、艾草洗头、泡脚、饮食提醒，以及全程情感支持，帮助产妈妈安心恢复。</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">😴</div>
+      <h3><span class="en">Sleep & Routine Guidance</span><span class="zh">作息规律建立</span></h3>
+      <p class="en">Helping babies establish sleep-wake cycles and feeding routines. Night care included — I wake for feeds so you can rest.</p>
+      <p class="zh">帮助宝宝建立规律的作息和喂养时间表，夜间起夜照顾，让产妈妈充分休息恢复体力。</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label en">Work History</div>
+  <div class="section-label zh">工作经历</div>
+  <h2 class="section-title en">10+ years serving families <em>worldwide</em></h2>
+  <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">十年以上<em>国际服务经验</em></h2>
+  <div class="timeline-grid">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 13 – Apr 2, 2026</div>
+        <div class="timeline-title en">Phoenix, Arizona, USA</div>
+        <div class="timeline-title zh">美国·亚利桑那州凤凰城</div>
+        <div class="timeline-desc en">Postpartum and newborn care for a family in Phoenix, AZ.</div>
+        <div class="timeline-desc zh">在亚利桑那州凤凰城为家庭提供月嫂及新生儿护理服务。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2024 – 2026</div>
+        <div class="timeline-title en">LA Irvine Maternity Center, Austin & San Francisco Bay Area</div>
+        <div class="timeline-title zh">美国——洛杉矶尔湾月子中心、奥斯汀、旧金山湾区</div>
+        <div class="timeline-desc en">Multiple families at a professional maternity center and private homes across California and Texas.</div>
+        <div class="timeline-desc zh">在洛杉矶尔湾月子中心及加州、德州多个家庭提供专业月嫂服务。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jan – Mar 2024</div>
+        <div class="timeline-title en">New York City, USA</div>
+        <div class="timeline-title zh">美国·纽约</div>
+        <div class="timeline-desc en">26-day postpartum care, then transitioned to full-time childcare.</div>
+        <div class="timeline-desc zh">26天月嫂服务后转为全职育儿嫂。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Dec 2022 – Jan 2024</div>
+        <div class="timeline-title en">London, United Kingdom</div>
+        <div class="timeline-title zh">英国·伦敦</div>
+        <div class="timeline-desc en">Postpartum care for a family with twins; continued as full-time nanny.</div>
+        <div class="timeline-desc zh">为旅居伦敦的上海家庭提供双胞胎月嫂服务，后转为育儿嫂。</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Dec 2020 – Jun 2022</div>
+        <div class="timeline-title en">Shanghai, Xuhui District</div>
+        <div class="timeline-title zh">上海·徐汇区</div>
+        <div class="timeline-desc en">100-day postpartum period followed by ongoing childcare.</div>
+        <div class="timeline-desc zh">100天月嫂服务后继续担任育儿嫂。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Feb 2018 – Nov 2020</div>
+        <div class="timeline-title en">Shanghai, Putuo District</div>
+        <div class="timeline-title zh">上海·普陀区</div>
+        <div class="timeline-desc en">Specialized 48-day care for a Canadian-Chinese family's newborn daughter.</div>
+        <div class="timeline-desc zh">为加拿大华侨家庭提供48天专职新生女宝护理。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Jan 2013 – Dec 2017</div>
+        <div class="timeline-title en">Shandong, Qingdao, Guangzhou & Beijing, China</div>
+        <div class="timeline-title zh">山东、青岛、广州、北京</div>
+        <div class="timeline-desc en">Start of professional career — served many families across Chinese cities.</div>
+        <div class="timeline-desc zh">职业生涯起步，在多个城市服务了众多家庭。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="section-label en">Credentials</div>
+  <div class="section-label zh">职业证书</div>
+  <h2 class="section-title en">Certified, trained, <em>and ready</em></h2>
+  <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">专业认证，<em>持证上岗</em></h2>
+  <div class="certs-grid">
+    <div class="cert-card" onclick="openModal('images/cert_ob.png')">
+      <img src="images/cert_ob.png" alt="OB Maternity Academy Certificate" />
+      <div class="cert-info">
+        <h4><span class="en">OB Maternity Academy — Certified Postpartum Doula & Newborn Specialist</span><span class="zh">OB母婴学院认证产后月嫂暨新生儿专家</span></h4>
+        <p><span class="en">Issued May 5, 2025 · Expires May 4, 2028 · Cert No. ma42ys1ao</span><span class="zh">颁发于2025年5月5日 · 有效期至2028年5月4日</span></p>
+      </div>
+    </div>
+    <div class="cert-card" onclick="openModal('images/cert_bls.png')">
+      <img src="images/cert_bls.png" alt="AHA BLS CPR Certificate" />
+      <div class="cert-info">
+        <h4><span class="en">American Heart Association — BLS Provider (CPR & AED)</span><span class="zh">美国心脏协会 BLS基础生命支持</span></h4>
+        <p><span class="en">Issued April 29, 2025 · Renew by April 2027</span><span class="zh">颁发于2025年4月29日 · 续期至2027年4月</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="cert-list">
+    <div class="cert-pill"><span class="en">Montessori Early Education</span><span class="zh">蒙氏早教证书</span></div>
+    <div class="cert-pill"><span class="en">Advanced Infant Care Specialist</span><span class="zh">高级育婴师</span></div>
+    <div class="cert-pill"><span class="en">Advanced Pediatric Massage</span><span class="zh">高级小儿推拿师</span></div>
+    <div class="cert-pill"><span class="en">Advanced Lactation Consultant</span><span class="zh">高级催乳师</span></div>
+    <div class="cert-pill"><span class="en">Maternal & Infant Care Nurse</span><span class="zh">高级母婴护理师</span></div>
+    <div class="cert-pill"><span class="en">Level 5 Chinese Pastry Chef</span><span class="zh">五级中式面点师</span></div>
+    <div class="cert-pill"><span class="en">Level 5 Housekeeping Professional</span><span class="zh">五级家政服务员</span></div>
+    <div class="cert-pill"><span class="en">Elderly Care Nursing (Medical)</span><span class="zh">养老护理（医疗照护）</span></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-label en">Photo Gallery</div>
+  <div class="section-label zh">相册</div>
+  <h2 class="section-title en">Moments from my <em>practice</em></h2>
+  <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">工作<em>点滴留影</em></h2>
+  <div class="gallery-grid">
+    <div class="gallery-item wide" onclick="openModal('images/photo5.jpg')">
+      <img src="images/photo5.jpg" alt="Yaling with twins" />
+    </div>
+    <div class="gallery-item" onclick="openModal('images/photo1.jpg')">
+      <img src="images/photo1.jpg" alt="Yaling with newborn" style="object-position:center;" />
+    </div>
+    <div class="gallery-item" onclick="openModal('images/photo2.jpg')">
+      <img src="images/photo2.jpg" alt="Yaling with baby outdoors" />
+    </div>
+    <div class="gallery-item" onclick="openModal('images/photo3.jpg')">
+      <img src="images/photo3.jpg" alt="Yaling at celebration" />
+    </div>
+    <div class="gallery-item wide" onclick="openModal('images/photo4.jpg')">
+      <img src="images/photo4.jpg" alt="Yaling with baby" style="object-position:center;" />
+    </div>
+    <div class="gallery-item" onclick="openModal('images/photo6.jpg')">
+      <img src="images/photo6.jpg" alt="Yaling with toddler" style="object-position:center;" />
+    </div>
+  </div>
+</section>
+
+<section id="pdf-gallery">
+  <div class="section-label en">Documents & Portfolio</div>
+  <div class="section-label zh">文件与作品集</div>
+  <h2 class="section-title en">Resume, references & <em>cooking showcase</em></h2>
+  <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">简历、推荐信与<em>厨艺展示</em></h2>
+  <div class="pdf-tabs">
+    <button class="pdf-tab active" onclick="showTab(event,'tab-profile')"><span class="en">Profile & Skills</span><span class="zh">个人简介与技能</span></button>
+    <button class="pdf-tab" onclick="showTab(event,'tab-work')"><span class="en">Work & Cooking</span><span class="zh">工作日常与厨艺</span></button>
+    <button class="pdf-tab" onclick="showTab(event,'tab-certs-pdf')"><span class="en">Certificates</span><span class="zh">职业证书</span></button>
+    <button class="pdf-tab" onclick="showTab(event,'tab-reviews')"><span class="en">Client Reviews</span><span class="zh">客户好评</span></button>
+    <button class="pdf-tab" onclick="showTab(event,'tab-health')"><span class="en">Health Records</span><span class="zh">健康证明</span></button>
+    <button class="pdf-tab" onclick="showTab(event,'tab-recen')"><span class="en">Reference Letter (EN)</span><span class="zh">英文推荐信</span></button>
+  </div>
+
+  <div class="pdf-pages active" id="tab-profile">
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_1.jpg')">
+      <img src="images/resume_page_1.jpg" alt="Personal Profile" />
+      <div class="pdf-page-label"><span class="en">Personal Profile</span><span class="zh">个人简介</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_2.jpg')">
+      <img src="images/resume_page_2.jpg" alt="Skills & Work History" />
+      <div class="pdf-page-label"><span class="en">Skills & Work History</span><span class="zh">职业技能与工作经历</span></div>
+    </div>
+  </div>
+
+  <div class="pdf-pages" id="tab-work">
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_3.jpg')">
+      <img src="images/resume_page_3.jpg" alt="Daily Work 1" />
+      <div class="pdf-page-label"><span class="en">Daily Work — Page 1</span><span class="zh">工作日常（一）</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_4.jpg')">
+      <img src="images/resume_page_4.jpg" alt="Daily Work 2" />
+      <div class="pdf-page-label"><span class="en">Daily Work — Page 2</span><span class="zh">工作日常（二）</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_5.jpg')">
+      <img src="images/resume_page_5.jpg" alt="Cooking Showcase 1" />
+      <div class="pdf-page-label"><span class="en">Cooking Showcase — Page 1</span><span class="zh">厨艺展示（一）</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_6.jpg')">
+      <img src="images/resume_page_6.jpg" alt="Cooking Showcase 2" />
+      <div class="pdf-page-label"><span class="en">Cooking Showcase — Page 2</span><span class="zh">厨艺展示（二）</span></div>
+    </div>
+  </div>
+
+  <div class="pdf-pages" id="tab-certs-pdf">
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_7.jpg')">
+      <img src="images/resume_page_7.jpg" alt="Professional Certificates" />
+      <div class="pdf-page-label"><span class="en">Professional Certificates</span><span class="zh">职业证书证明</span></div>
+    </div>
+  </div>
+
+  <div class="pdf-pages" id="tab-reviews">
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_8.jpg')">
+      <img src="images/resume_page_8.jpg" alt="Client Reviews" />
+      <div class="pdf-page-label"><span class="en">Client Reviews</span><span class="zh">客户评价</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_9.jpg')">
+      <img src="images/resume_page_9.jpg" alt="Recommendation Letter" />
+      <div class="pdf-page-label"><span class="en">Recommendation Letter</span><span class="zh">推荐信</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_10.jpg')">
+      <img src="images/resume_page_10.jpg" alt="Thank You Letter" />
+      <div class="pdf-page-label"><span class="en">Thank You Letter</span><span class="zh">感谢信</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/rec_letter.jpg')">
+      <img src="images/rec_letter.jpg" alt="Recommendation from Summer" />
+      <div class="pdf-page-label"><span class="en">Recommendation — Summer's Family</span><span class="zh">推荐信——Summer家庭</span></div>
+    </div>
+  </div>
+
+  <div class="pdf-pages" id="tab-health">
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_11.jpg')">
+      <img src="images/resume_page_11.jpg" alt="Vaccination Record" />
+      <div class="pdf-page-label"><span class="en">Vaccination Record (2024)</span><span class="zh">疫苗接种记录（2024）</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_12.jpg')">
+      <img src="images/resume_page_12.jpg" alt="Hepatitis Test" />
+      <div class="pdf-page-label"><span class="en">Hepatitis A/B/C Test Results</span><span class="zh">甲乙丙型肝炎检测结果</span></div>
+    </div>
+    <div class="pdf-page-item" onclick="openModal('images/resume_page_13.jpg')">
+      <img src="images/resume_page_13.jpg" alt="H Pylori Test" />
+      <div class="pdf-page-label"><span class="en">H. Pylori Antibody Test</span><span class="zh">幽门螺杆菌抗体检测</span></div>
+    </div>
+  </div>
+
+  <div class="pdf-pages" id="tab-recen">
+    <div class="pdf-page-item" onclick="openModal('images/rec_en_1.jpg')">
+      <img src="images/rec_en_1.jpg" alt="English Reference Letter" />
+      <div class="pdf-page-label"><span class="en">Reference Letter — Amber Cai, Bay Area 2025</span><span class="zh">英文推荐信——Amber Cai（湾区，2025年）</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="section-label en">Kind Words</div>
+  <div class="section-label zh">客户好评</div>
+  <h2 class="section-title en">What families say about <em>Yaling</em></h2>
+  <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">家庭们对<em>宋亚玲</em>的评价</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="en">Yaling is extremely experienced with newborns. She handles bathing and skin care with precision, and as our baby spent more time with her, he slowly began recognizing her voice and smiling. Her professionalism gave us complete peace of mind.</p>
+      <p class="zh">宋亚玲月嫂对新生儿非常有经验，对护理产品的成分比例都记得清楚；她专业能力扎实，包括新生儿喂养、拍嗝、洗澡、抚触、作息规律建立等，让家人十分安心。</p>
+      <div class="testimonial-author">— Summer<span><span class="en">Bay Area Family</span><span class="zh">湾区家庭</span></span></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="en">Yaling's cooking was exceptional — nutritious, well-balanced, and delicious. Our whole family loved her food. She was warm, cheerful, and always found time to chat and play with our other kids. She truly felt like family.</p>
+      <p class="zh">宋姐做饭非常好吃，也很会搭配，我们一家人都非常喜欢。宋姐性格开朗，有空的时候还会和我家孩子们聊天、玩一玩，跟我们相处得像家人一样。</p>
+      <div class="testimonial-author">— Summer<span><span class="en">Recommendation Letter</span><span class="zh">推荐信</span></span></div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="en">She is not only a professional caregiver — she is a warm, responsible family member. Her expert skills and rich experience made our entire postpartum period smooth and joyful. Every day she shared in our baby's growing moments like a true family member.</p>
+      <p class="zh">您不仅是一位专业的月嫂，更是一位充满爱心和责任心的家人。您的专业技能和丰富经验让整个月子期过得非常顺利和愉快，每一天您都和家人一样与我们共同分担着宝宝的成长点滴。</p>
+      <div class="testimonial-author">— Amber Cai<span><span class="en">Bay Area Family, March–May 2025</span><span class="zh">湾区家庭，2025年3–5月</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-info">
+    <div class="section-label en">Get in Touch</div>
+    <div class="section-label zh">联系我</div>
+    <h2 class="section-title en">Let's start your <em>journey</em> together</h2>
+    <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">开始我们的<em>合作之旅</em></h2>
+    <p class="en">I offer a free consultation call to discuss your needs, your due date, and how I can best support your family. Reach out in English or Chinese — I'm happy to help in both!</p>
+    <p class="zh">我提供免费的预约咨询通话，了解您的需求、预产期及如何最好地支持您的家庭。欢迎用中文或英文联系我！</p>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <div class="icon">📍</div>
+        <div><span class="en">Bay Area · Los Angeles · Phoenix, AZ</span><span class="zh">旧金山湾区 · 洛杉矶 · 凤凰城</span><br><small style="color:var(--text-light)"><span class="en">Available for travel nationally</span><span class="zh">全国可约</span></small></div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">💬</div>
+        <div><span class="en">WeChat / WhatsApp available</span><span class="zh">微信 / WhatsApp 均可联系</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">🌐</div>
+        <div><span class="en">English & Mandarin (Chinese)</span><span class="zh">中英双语服务</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">🕐</div>
+        <div><span class="en">24/7 availability for active clients</span><span class="zh">在职期间全天24小时随叫随到</span></div>
+      </div>
+    </div>
+  </div>
+  <form class="contact-form" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label><span class="en">First Name</span><span class="zh">名字</span></label>
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label><span class="en">Last Name</span><span class="zh">姓氏</span></label>
+        <input type="text" placeholder="Your last name" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label><span class="en">Email</span><span class="zh">邮箱</span></label>
+      <input type="email" placeholder="hello@email.com" />
+    </div>
+    <div class="form-group">
+      <label><span class="en">Due Date / Expected Start</span><span class="zh">预产期 / 预计开始日期</span></label>
+      <input type="date" />
+    </div>
+    <div class="form-group">
+      <label><span class="en">Service Needed</span><span class="zh">所需服务</span></label>
+      <select>
+        <option value="">Select…</option>
+        <option>Postpartum Care</option>
+        <option>Newborn Specialist</option>
+        <option>Full-time Nanny</option>
+        <option>Not sure yet</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label><span class="en">Message</span><span class="zh">留言</span></label>
+      <textarea placeholder="Tell me about your family and what you're looking for…"></textarea>
+    </div>
+    <button type="submit" class="btn-submit">
+      <span class="en">Send Message 🌸</span>
+      <span class="zh">发送留言 🌸</span>
+    </button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 <strong>Yaling Song</strong> &nbsp;·&nbsp; <span class="en">Certified Postpartum Doula & Newborn Specialist</span><span class="zh">认证月嫂·新生儿护理专家</span></p>
+  <p style="margin-top:0.5rem;font-size:0.78rem;"><span class="en">Bay Area · Los Angeles · Phoenix, AZ &nbsp;·&nbsp; English & Mandarin</span><span class="zh">旧金山湾区 · 洛杉矶 · 凤凰城 &nbsp;·&nbsp; 中英双语服务</span></p>
+</footer>
+
+<div class="modal-overlay" id="modal" onclick="closeModal()">
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <img id="modal-img" src="" alt="" onclick="event.stopPropagation()" />
+</div>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.remove('lang-en','lang-zh');
+    document.body.classList.add('lang-'+lang);
+    document.getElementById('btn-en').classList.toggle('active', lang==='en');
+    document.getElementById('btn-zh').classList.toggle('active', lang==='zh');
+  }
+  function showTab(e, id) {
+    document.querySelectorAll('.pdf-pages').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.pdf-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    e.currentTarget.classList.add('active');
+  }
+  function openModal(src) {
+    document.getElementById('modal-img').src = src;
+    document.getElementById('modal').classList.add('open');
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    const isZh = document.body.classList.contains('lang-zh');
+    btn.textContent = isZh ? '✅ 已发送！' : '✅ Message Sent!';
+    btn.style.background = 'var(--sage-dark)';
+    setTimeout(() => {
+      btn.innerHTML = '<span class="en">Send Message 🌸</span><span class="zh">发送留言 🌸</span>';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }});
+  }, {threshold:0.08});
+  document.querySelectorAll('.skill-card,.testimonial-card,.gallery-item,.cert-card,.cert-pill,.timeline-item,.pdf-page-item').forEach(el => {
+    el.style.opacity='0'; el.style.transform='translateY(18px)'; el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+    obs.observe(el);
+  });
+</script>
+</body>
+</html>
