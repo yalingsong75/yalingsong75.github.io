@@ -97,6 +97,16 @@
 
     /* CERTS */
     #certifications { background: var(--cream); }
+    .liability-banner { background: linear-gradient(135deg, var(--warm-brown), #5a3526); color: #fff; border-radius: 20px; padding: 1.8rem 2.2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; box-shadow: 0 8px 28px rgba(122,79,58,0.3); }
+    .liability-banner-left { display: flex; align-items: center; gap: 1.2rem; flex: 1; min-width: 200px; }
+    .liability-shield { font-size: 2.4rem; flex-shrink: 0; }
+    .liability-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .liability-sub { font-size: 0.78rem; opacity: 0.8; line-height: 1.5; }
+    .liability-amounts { display: flex; align-items: center; gap: 1.5rem; flex-shrink: 0; }
+    .liability-amount { text-align: center; }
+    .liability-num { display: block; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .liability-amount span:last-child { font-size: 0.72rem; opacity: 0.75; letter-spacing: 0.1em; text-transform: uppercase; }
+    .liability-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.3); }
     .certs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2rem; margin-top: 2.5rem; }
     .cert-card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.07); transition: transform 0.25s; cursor: pointer; }
     .cert-card:hover { transform: translateY(-4px); }
@@ -328,7 +338,7 @@
   <div class="timeline-grid">
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-date">Jan 13 – Apr 2, 2026</div>
+        <div class="timeline-date">Jan – Apr 2026</div>
         <div class="timeline-title en">Phoenix, Arizona, USA</div>
         <div class="timeline-title zh">美国·亚利桑那州凤凰城</div>
         <div class="timeline-desc en">Postpartum and newborn care for a family in Phoenix, AZ.</div>
@@ -387,6 +397,21 @@
   <div class="section-label zh">职业证书</div>
   <h2 class="section-title en">Certified, trained, <em>and ready</em></h2>
   <h2 class="section-title zh" style="font-family:'Noto Serif SC',serif;">专业认证，<em>持证上岗</em></h2>
+  <div class="liability-banner">
+    <div class="liability-banner-left">
+      <div class="liability-shield">🛡️</div>
+      <div>
+        <div class="liability-title"><span class="en">Fully Insured — Professional Liability</span><span class="zh">专业责任险 · 全额承保</span></div>
+        <div class="liability-sub"><span class="en">Insured by Medical Protective Company (MPC) · Policy No. VJ9169 · Valid Mar 20, 2026 – Mar 20, 2027</span><span class="zh">承保方：Medical Protective Company (MPC) · 保单号 VJ9169 · 有效期 2026年3月20日至2027年3月20日</span></div>
+      </div>
+    </div>
+    <div class="liability-amounts">
+      <div class="liability-amount"><span class="liability-num">$1,000,000</span><span class="en">Per Incident</span><span class="zh">每次事故</span></div>
+      <div class="liability-divider"></div>
+      <div class="liability-amount"><span class="liability-num">$6,000,000</span><span class="en">Aggregate</span><span class="zh">总保额</span></div>
+    </div>
+  </div>
+
   <div class="certs-grid">
     <div class="cert-card" onclick="openModal('images/cert_ob.png')">
       <img src="images/cert_ob.png" alt="OB Maternity Academy Certificate" />
@@ -400,6 +425,13 @@
       <div class="cert-info">
         <h4><span class="en">American Heart Association — BLS Provider (CPR & AED)</span><span class="zh">美国心脏协会 BLS基础生命支持</span></h4>
         <p><span class="en">Issued April 29, 2025 · Renew by April 2027</span><span class="zh">颁发于2025年4月29日 · 续期至2027年4月</span></p>
+      </div>
+    </div>
+    <div class="cert-card" onclick="openModal('images/liability_cert.jpg')" style="grid-column: span 2;">
+      <img src="images/liability_cert.jpg" alt="Certificate of Liability Insurance" style="height:280px; object-fit:cover; object-position:top;" />
+      <div class="cert-info">
+        <h4><span class="en">Certificate of Liability Insurance — Professional Liability (Doula)</span><span class="zh">职业责任险证书（月嫂/导乐）</span></h4>
+        <p><span class="en">Insurer: Medical Protective Company (MPC) · $1,000,000 per incident / $6,000,000 aggregate · Valid through Mar 20, 2027</span><span class="zh">承保方：Medical Protective Company · 每次事故赔付上限 $100万 · 总保额 $600万 · 有效期至2027年3月20日</span></p>
       </div>
     </div>
   </div>
